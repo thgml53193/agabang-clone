@@ -26,11 +26,10 @@ header {
   justify-content: space-between;
   padding: 1.8rem 2rem;
   color: #fff;
-  /*background-color: #ccc;*/
   position: fixed;
-  z-index: 10;
+  z-index: 500;
   width: 100%;
-  transition: 0.2s;
+  transition: 0.4s;
 }
 
 header .gnb {
@@ -57,7 +56,7 @@ header.active {
 }
 header.active .gnb img,
 header.active .gnb-right img {
-  filter: none; /* 기존 invert 제거 */
+  filter: none;
 }
 
 /*로고 h1*/
@@ -78,7 +77,6 @@ header.active .logo_bk {
 header .gnb-right {
   display: flex;
   gap: 0.8rem;
-  /* border: 1px solid red;*/
 }
 header .gnb-right img {
   filter: brightness(0) invert(1);
@@ -195,7 +193,7 @@ header .gnb-right .num {
   width: auto;
   height: auto;
   margin: 0;
-  color: transparent; /* 혹시 모를 잔상 방지 */
+  color: transparent;
 }
 #visual .arrow li.swiper-button-prev,
 #visual .arrow li.swiper-button-next {
@@ -212,9 +210,7 @@ header .gnb-right .num {
 #visual .arrow img {
   width: 5rem;
   filter: brightness(0) invert(1);
-}
-#visual .arrow li:hover img {
-  opacity: 0.5;
+  transition: opacity 0.3s;
 }
 
 /* container */
@@ -225,18 +221,15 @@ header .gnb-right .num {
   margin: 8rem auto;
   overflow: hidden;
 }
-/* 왼쪽 가림막 추가 */
 .con01 .list.swiper::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  /* 중요: JS에서 설정한 slidesOffsetBefore 수치만큼 너비를 줍니다. */
-  /* 만약 20px라면 20px, %라면 그에 맞춰 조절하세요. */
   width: 0px;
   height: 100%;
-  background-color: #fff; /* 배경색과 똑같은 색으로 덮기 */
-  z-index: 10; /* 슬라이드보다 위에 오도록 설정 */
+  background-color: #fff;
+  z-index: 10;
 }
 .seller {
   display: flex;
@@ -287,9 +280,7 @@ header .gnb-right .num {
   position: relative;
   margin-bottom: 1rem;
 }
-.thumbnail:hover .img_view {
-  box-shadow: 0 8px 24px 4px rgba(0, 0, 0, 0.06);
-}
+
 /* 장바구니 담기 */
 .thumbnail div {
   background-color: #fff;
@@ -305,14 +296,12 @@ header .gnb-right .num {
   bottom: 0.5rem;
   transform: translateX(-50%);
   opacity: 0;
+  transition: opacity 0.3s;
 }
-/* 장바구니 담기 보이게 하기 */
-.list li:hover .thumbnail div {
-  opacity: 0.9;
-}
-.tumbnail div img {
+.thumbnail div img {
   width: 1.2rem;
 }
+
 /* heart */
 .heart {
   position: absolute;
@@ -406,9 +395,6 @@ header .gnb-right .num {
   width: 100%;
   position: relative;
 }
-.con02 .right .thumbnail:hover .img-view {
-  box-shadow: 0px 8px 24px 4px rgba(0, 0, 0, 0.06);
-}
 .con02 .right .thumbnail .img-view {
   width: 100%;
   transition: 0.3s;
@@ -443,12 +429,13 @@ header .gnb-right .num {
 }
 
 /*banner*/
-#banner {
+.banner {
   width: 100%;
   background-color: #eee;
   color: #444;
+  position: relative;
 }
-#banner .wrap {
+.banner .wrap {
   position: relative;
   width: 100%;
   max-width: 1200px;
@@ -456,47 +443,47 @@ header .gnb-right .num {
   padding: 1.5rem 0px;
   overflow: hidden;
 }
-#banner .box {
+.banner .box {
   display: flex;
   text-align: center;
 }
-#banner .box li {
+.banner .box li {
   width: 100%;
   flex-shrink: 0;
 }
-#banner .box li p:first-child {
+.banner .box li p:first-child {
   margin-bottom: 1rem;
   font-size: 1rem;
 }
-#banner .box li p:last-child {
+.banner .box li p:last-child {
   font-size: 0.9rem;
 }
 /*banner안에 있는 화살표*/
-#banner .swiper-button-next::after,
-#banner .swiper-button-prev::after {
+.banner .swiper-button-next::after,
+.banner .swiper-button-prev::after {
   display: none !important;
 }
-#banner .swiper-button-prev,
-#banner .swiper-button-next {
+.banner .swiper-button-prev,
+.banner .swiper-button-next {
   width: auto;
   height: auto;
   margin: 0;
-  color: transparent; /* 혹시 모를 잔상 방지 */
+  color: transparent;
 }
-#banner .arrow li {
+.banner .arrow li {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
 }
-#banner .arrow .swiper-button-prev {
+.banner .arrow .swiper-button-prev {
   left: 0;
 }
-#banner .arrow .swiper-button-next {
+.banner .arrow .swiper-button-next {
   right: 0;
 }
-/*번호*/
-#banner .num {
+/* 번호 페이징 틀 */
+.banner .bn-num {
   width: 80px;
   border: 1px solid #888;
   border-radius: 10px;
@@ -504,19 +491,24 @@ header .gnb-right .num {
   left: 50%;
   transform: translateX(-50%);
   padding: 0.2rem 0px;
-  margin-top: 1rem;
-  /* display: none; */
-}
-#banner .num ul {
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: 0.8rem;
+  z-index: 10;
+  bottom: -40px !important;
+  top: auto !important;
+  margin-top: 0;
+  background-color: #fff;
+  display: none;
 }
-#banner .num li {
-  padding: 0px 0.5rem;
+.banner .bn-num span {
+  padding: 0px 0.2rem;
 }
-#banner .num li:first-child {
-  border-right: 1px solid #aaa;
+.banner .bn-num .separator {
+  color: #aaa;
+  font-size: 0.7rem;
+  margin: 0px 0.1rem;
 }
 
 /* con04 */
@@ -525,23 +517,12 @@ header .gnb-right .num {
   max-width: 1200px;
   margin: 8rem auto;
 }
-
-/* 🔧 [수정] swiper 기본 상태 유지 (모바일 기준) */
-/* 기존에 transform: none !important 제거 */
 .con04 .brandSwiper .swiper-wrapper {
   display: flex;
-  /* 🔧 flex-wrap 제거 (swiper에서는 기본 nowrap이 맞음) */
-  /* flex-wrap: wrap !important; ❌ 삭제 */
-  /* transform: none !important; ❌ 삭제 */
 }
-
 .con04 .brandSwiper .swiper-slide {
-  /* 🔧 width 강제 제거 */
-  /* width: calc((100% - 1rem) / 2) !important; ❌ 삭제 */
-  /* margin-right: 0 !important; ❌ 삭제 */
   position: relative;
 }
-
 .con04 picture img {
   width: 100%;
   object-fit: cover;
@@ -571,7 +552,6 @@ header .gnb-right .num {
   font-size: 0.8rem;
   z-index: 2;
 }
-
 .txt04 p:first-child {
   font-size: 2rem;
   margin-bottom: 1rem;
@@ -591,13 +571,8 @@ header .gnb-right .num {
   border-radius: 0.5rem;
   line-height: 1.2;
 }
-
 .view img {
   transition: 0.5s;
-}
-
-.view:hover img {
-  transform: rotate(45deg);
 }
 
 /* top */
@@ -619,12 +594,11 @@ footer .wrap {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  color: #999;
+  color: #222;
 }
 footer .wrap p {
   line-height: 2;
 }
-/* footer left */
 footer .left ul {
   display: flex;
   gap: 1.5rem;
@@ -637,7 +611,6 @@ footer .left img {
 footer .copy {
   margin: 1.5rem 0 2rem;
 }
-/* footer right */
 footer .right {
   text-align: right;
 }
@@ -671,11 +644,35 @@ footer .right .site {
   width: 200px;
   border-radius: 20px;
 }
+
 /* bottom-nav */
 .bottom-nav {
+  width: 100%;
+  display: flex;
+  padding: 0.5rem 0;
+  font-size: 0.7rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 500;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  transition: 0.4s;
   display: none;
 }
-/* 1024 */
+.bottom-nav li {
+  flex: 1;
+}
+.bottom-nav a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bottom-nav.hide {
+  transform: translateY(100%);
+}
+/* 반응형 1024px */
 @media (max-width: 1024px) {
   header h1 img {
     width: 100px;
@@ -683,7 +680,7 @@ footer .right .site {
   header span {
     display: none;
   }
-  /*visual*/
+
   #visual .img div p:first-child {
     font-size: 1.4rem;
     font-weight: bold;
@@ -693,12 +690,11 @@ footer .right .site {
     font-size: 0.8rem;
     line-height: 1.6;
   }
-  /*=== visual 화살표 ===*/
   #visual .arrow li.swiper-button-prev,
   #visual .arrow li.swiper-button-next {
     display: none;
   }
-  /* con01 */
+
   .con01 {
     width: 100%;
     max-width: none !important;
@@ -721,25 +717,21 @@ footer .right .site {
   .seller .right .btn-next {
     padding: 0.1rem;
   }
-  /* con01 list */
-  /* 썸네일 */
+
   .thumbnail {
     margin-bottom: 0.8rem;
   }
-  /* 장바구니 담기 */
   .thumbnail div {
     display: none;
   }
-  /* heart */
-  /* description */
-  /* 폰트사이즈를 데스크탑에서 조금 더 키우기로?! */
+
   .description p:nth-child(2) {
     margin: 0.5rem 0;
   }
   .description .cost {
     text-decoration: line-through;
   }
-  /*con02*/
+
   .con02 {
     width: 95%;
     max-width: none !important;
@@ -752,12 +744,10 @@ footer .right .site {
     flex-wrap: wrap;
     gap: 0.5rem;
   }
-  /*con02 left*/
   .con02 .left {
     width: 100%;
     position: relative;
   }
-  /*con02 right*/
   .con02 .right.giftSwiper {
     width: 100%;
   }
@@ -765,18 +755,20 @@ footer .right .site {
   .con02 .center .btn-next {
     padding: 0.1rem;
   }
-  /*banner안에 있는 화살표 없애기*/
-  #banner .arrow {
+
+  .banner .arrow {
     display: none;
   }
-  /* con04안에 있는 글자 txt04 */
+  .banner .bn-num {
+    display: flex;
+  }
+
   .txt04 {
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     word-break: keep-all;
   }
-  /* 중앙 위치, 폰트사이즈 조절 */
   .txt04 p:first-child {
     font-size: 1.4rem;
     margin-bottom: 1rem;
@@ -784,7 +776,7 @@ footer .right .site {
   .view {
     margin: 1rem auto;
   }
-  /* footer */
+
   footer {
     padding: 3rem 0;
   }
@@ -794,7 +786,6 @@ footer .right .site {
     display: block;
     font-size: 0.7rem;
   }
-  /* footer left */
   footer .left ul {
     gap: 1rem;
     font-size: 0.8rem;
@@ -802,7 +793,6 @@ footer .right .site {
   footer .left img {
     width: 100px;
   }
-  /* footer right */
   footer .right {
     text-align: left;
   }
@@ -827,72 +817,92 @@ footer .right .site {
   }
 }
 
+/* 반응형 768px (PC 이상 화면 제어) */
 @media (min-width: 768px) {
   .con04 .brandSwiper .swiper-wrapper {
     display: flex !important;
     flex-wrap: wrap !important;
     gap: 1rem;
-
-    /* 🔧 PC에서만 swiper 비활성 상태처럼 보이게 */
     transform: none !important;
   }
-
   .con04 .brandSwiper .swiper-slide {
     width: calc((100% - 1rem) / 2) !important;
     margin-right: 0 !important;
   }
 }
 
-/* 768 이하 con04 다시 플렉스 후 스와이퍼 슬라이더 */
+/* 반응형 768px 이하 (모바일, 태블릿) */
 @media (max-width: 768px) {
-  /* description */
   .description {
     font-size: 0.8rem;
   }
   .description p:last-child {
     font-size: 0.9rem;
   }
-  /*banner*/
-  #banner .box li p:first-child {
+
+  .banner .box li p:first-child {
     font-size: 0.9rem;
   }
-  #banner .box li p:last-child {
+  .banner .box li p:last-child {
     font-size: 0.8rem;
   }
 
-  /* con04 */
-  /* 옆 슬라이드 형식으로 다시 바꾸기/////////////////////////////////  */
   .con04 {
     width: 100%;
     overflow: hidden;
   }
-
   .con04 .brandSwiper {
     width: 100%;
     overflow: visible;
   }
-
   .con04 .brandSwiper .swiper-wrapper {
-    /* 🔧 swiper 기본 동작 유지 */
     flex-wrap: nowrap !important;
-    transform: translate3d(0, 0, 0); /* 🔧 명시적으로 복구 */
+    transform: translate3d(0, 0, 0);
   }
-
   .con04 .brandSwiper .swiper-slide {
-    width: auto; /* 🔧 !important 제거 */
+    width: auto;
     flex-shrink: 0;
     margin-right: 16px;
   }
-
   .view {
     margin: 1rem auto;
   }
+  .bottom-nav {
+    display: flex;
+  }
 }
 
-/* 480 이하 */
+/* 반응형 480px 이하 (작은 모바일) */
 @media (max-width: 480px) {
-  /* 동일 */
   header {
     padding: 1.2rem 1.5rem;
+  }
+}
+
+/* 마우스가 있는 기기에서만 작동하여 터치 잔상 방지 */
+@media (hover: hover) {
+  /* 비주얼 배너 화살표 호버 */
+  #visual .arrow li:hover img {
+    opacity: 0.5;
+  }
+
+  /* 상품 리스트(con01, con03) 썸네일 호버 */
+  .thumbnail:hover .img_view {
+    box-shadow: 0 8px 24px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  /* 상품 리스트(con01, con03) 장바구니 버튼 호버 */
+  .list li:hover .thumbnail div {
+    opacity: 0.9;
+  }
+
+  /* 선물하기(con02) 썸네일 그림자 호버 */
+  .con02 .right .thumbnail:hover .img-view {
+    box-shadow: 0px 8px 24px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  /* 뷰(자세히보기) 버튼 화살표 회전 호버 */
+  .view:hover img {
+    transform: rotate(45deg);
   }
 }
