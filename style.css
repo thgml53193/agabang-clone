@@ -657,6 +657,10 @@ footer .right .site-list li {
 footer .right .site-list li:last-child {
   border-bottom: none;
 }
+footer .right .site-list a {
+  display: block;
+  width: 100%;
+}
 footer .right .site {
   width: 100%;
   border: 1px solid #888;
@@ -936,7 +940,7 @@ footer .right .site.on img {
     transform: rotate(45deg);
   }
   /* 푸터 패밀리 사이트 리스트 호버 */
-  footer .right .site-list li {
+  footer .right .site-list li:hover {
     background-color: #f8f8f8;
   }
 }
