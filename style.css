@@ -546,28 +546,30 @@ header .gnb-right .num {
 .txt04 {
   width: 90%;
   position: absolute;
-  left: 1rem;
-  bottom: 1.5rem;
+  left: 2rem;
+  bottom: 2rem;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
   z-index: 2;
 }
 .txt04 p:first-child {
   font-size: 2rem;
+  line-height: 1;
   margin-bottom: 1rem;
   font-family: "Tenor Sans", sans-serif;
 }
 
 /* view */
 .view {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   align-items: center;
   width: 110px;
   justify-content: center;
-  padding: 0.4rem 0;
+  padding: 0.6rem 0;
   margin-top: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.3rem;
   line-height: 1.2;
   color: #444;
 }
