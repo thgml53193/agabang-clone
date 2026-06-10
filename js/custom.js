@@ -161,6 +161,7 @@ $(function () {
 
     if (extraAnimation) extraAnimation(tl);
   }
+
   // con01, con03 상품 슬라이드 요소들이 움직임
   createScrollAnimation(".con01", ".list .swiper-wrapper");
   createScrollAnimation(".con03", ".list .swiper-wrapper");
@@ -214,5 +215,10 @@ $(function () {
     }
 
     lastScrollTop = scrollTop;
+  });
+  // footer 패밀리사이트
+  $("footer .site").on("click", function () {
+    $(".site-list").slideToggle(400);
+    $(".site").toggleClass("on");
   });
 });
